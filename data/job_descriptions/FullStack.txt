@@ -1,0 +1,3 @@
+We are looking for a Full Stack Developer to join our fast-paced engineering team. The ideal candidate will be proficient in both front-end and back-end development, with hands-on experience in building scalable web applications. You will be responsible for implementing new features, maintaining codebases, and collaborating with cross-functional teams.
+
+You should be comfortable with modern frameworks like ReactJS and Node.js, and have a strong understanding of databases (MongoDB, PostgreSQL), REST APIs, and Git workflows. Exposure to containerization (Docker), CI/CD tools, and AWS is preferred. Strong communication, problem-solving skills, and a passion for clean code are essential.

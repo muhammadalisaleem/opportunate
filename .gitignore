@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.env
+output/
+.vscode/
+*.yml
+pfp.png

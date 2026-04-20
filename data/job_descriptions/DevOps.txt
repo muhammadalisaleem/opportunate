@@ -1,0 +1,16 @@
+Position: DevOps Engineer  
+Location: Hybrid – Bangalore / Remote  
+Experience: 3+ years
+
+Key Skills | Must-Have | Preferred
+-----------|-----------|---------
+Cloud | AWS (EC2, IAM, VPC) | Azure, GCP
+Containers | Docker, Kubernetes | Helm, OpenShift
+CI/CD | GitHub Actions, Jenkins | GitLab CI/CD
+Infra as Code | Terraform | Ansible, Pulumi
+Monitoring | Prometheus, Grafana | ELK, Loki
+
+Responsibilities:
+- Manage infrastructure-as-code pipelines.
+- Set up monitoring and alerting.
+- Troubleshoot performance and availability issues.

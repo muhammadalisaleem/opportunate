@@ -1,0 +1,8 @@
+{
+  "training_rows": 1167,
+  "job_titles": 723,
+  "skill_vocabulary_size": 957,
+  "min_skill_frequency": 3,
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "data_path": "datasets\\preprocessed_jobs.csv"
+}

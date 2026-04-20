@@ -1,0 +1,21 @@
+# Job Opening: Information Security Analyst
+
+## Role Summary
+We're looking for a security analyst to help defend our systems and users. This is a hybrid role requiring strong technical and investigative skills.
+
+## Required Skills:
+- SIEM tools (Splunk, Sentinel)
+- Incident response procedures
+- OS hardening (Linux/Windows)
+- Firewalls, IDS/IPS
+
+## Responsibilities:
+- Monitor real-time security alerts and act on incidents.
+- Conduct vulnerability assessments and patch audits.
+- Train employees on security best practices.
+
+## Nice to Have:
+- Any security certifications (e.g. Security+, CEH)
+- Experience with scripting for automation (Python, Bash)
+
+You will report directly to our InfoSec Manager and work closely with DevOps and Infra teams.

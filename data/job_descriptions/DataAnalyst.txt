@@ -1,0 +1,21 @@
+🔎 Role: Data Analyst  
+📍 Location: Remote  
+📅 Posted: 1 week ago  
+
+About the role  
+We're seeking a data analyst who thrives on converting raw data into business insights. This role requires a mix of SQL fluency, dashboarding skills, and storytelling with data.
+
+Responsibilities  
+- Build and maintain dashboards (Power BI / Tableau).  
+- Write optimized SQL queries to extract insights.  
+- Partner with business teams to define metrics and KPIs.  
+
+Must-Have Skills  
+- Advanced SQL, Excel, Power BI or Tableau.  
+- Strong analytical mindset and problem-solving abilities.  
+- Understanding of data warehousing concepts.  
+
+Good to Have  
+- Python or R for analysis.  
+- Familiarity with Snowflake or BigQuery.  
+- Basic statistics and hypothesis testing.

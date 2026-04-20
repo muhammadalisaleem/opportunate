@@ -1,0 +1,17 @@
+We're building the future of intelligent systems. Join us as an AI/ML Researcher!
+
+What you'll be doing:
+- Conduct cutting-edge research in ML, NLP, or CV.
+- Prototype and test deep learning models (e.g., BERT, CNNs).
+- Collaborate with product teams to deploy research into real systems.
+
+You must have:
+- Strong Python & ML toolkit knowledge (PyTorch, TensorFlow, scikit-learn).
+- Solid background in linear algebra, statistics, and optimization.
+- Experience working with large datasets.
+
+Bonus if:
+- You've published in top-tier conferences (NeurIPS, ACL, CVPR).
+- You're familiar with distributed training (Horovod, Ray).
+
+This is a hands-on applied research role — bring your curiosity!

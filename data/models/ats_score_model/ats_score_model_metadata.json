@@ -1,0 +1,19 @@
+{
+  "training_rows": 1000,
+  "train_rows": 800,
+  "test_rows": 200,
+  "target": "AI Score (0-100)",
+  "mae": 1.3145604000384212,
+  "rmse": 1.8106229058259127,
+  "r2": 0.9938549753145958,
+  "data_path": "datasets\\preprocessed_resumes.csv",
+  "feature_columns": [
+    "has_certification",
+    "experience_years",
+    "projects_count",
+    "skill_count",
+    "skill_char_count",
+    "cert_count",
+    "education_rank"
+  ]
+}

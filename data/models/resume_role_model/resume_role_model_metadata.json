@@ -1,0 +1,14 @@
+{
+  "training_rows": 1000,
+  "train_rows": 800,
+  "test_rows": 200,
+  "labels": [
+    "AI Researcher",
+    "Cybersecurity Analyst",
+    "Data Scientist",
+    "Software Engineer"
+  ],
+  "accuracy": 1.0,
+  "data_path": "datasets\\preprocessed_resumes.csv",
+  "report": "                       precision    recall  f1-score   support\n\n        AI Researcher       1.00      1.00      1.00        51\nCybersecurity Analyst       1.00      1.00      1.00        51\n       Data Scientist       1.00      1.00      1.00        51\n    Software Engineer       1.00      1.00      1.00        47\n\n             accuracy                           1.00       200\n            macro avg       1.00      1.00      1.00       200\n         weighted avg       1.00      1.00      1.00       200\n"
+}
