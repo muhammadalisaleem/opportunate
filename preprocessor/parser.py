@@ -1,15 +1,22 @@
-import fitz  # type: ignore # PyMuPDF
+from io import BytesIO
 from pathlib import Path
 from docx import Document # type: ignore
 import streamlit as st
+from pypdf import PdfReader
+
 
 def extract_text_from_pdf(pdf_bytes):
-    """Extract text from PDF using PyMuPDF."""
-    doc = fitz.open(stream = pdf_bytes, filetype = "pdf")
-    text = ""
-    for page in doc:
-        text += page.get_text() # type: ignore
-    return text
+    """Extract text from PDF using pypdf."""
+    try:
+        pdf_file = BytesIO(pdf_bytes)
+        reader = PdfReader(pdf_file)
+        text = ""
+        for page in reader.pages:
+            text += page.extract_text() or ""
+        return text
+    except Exception as e:
+        st.error(f"Error reading PDF: {e}")
+        return ""
 
 def extract_text_from_docx(docx_bytes):
     from io import BytesIO

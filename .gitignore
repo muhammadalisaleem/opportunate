@@ -5,3 +5,8 @@ output/
 .vscode/
 *.yml
 pfp.png
+.streamlit/secrets.toml
+.venv/
+*.egg-info/
+dist/
+build/

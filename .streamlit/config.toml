@@ -1,2 +1,11 @@
 [client]
 toolbarMode = "minimal"
+showErrorDetails = true
+
+[logger]
+level = "info"
+
+[server]
+enableXsrfProtection = true
+maxUploadSize = 200
+enableCORS = false

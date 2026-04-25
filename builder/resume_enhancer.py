@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit.errors import StreamlitSecretNotFoundError
 import google.generativeai as genai
 import os
 import re
@@ -6,7 +7,10 @@ import re
 # Function to get API key from Streamlit secrets or user input
 def get_gemini_api_key():
     # Attempt to get from Streamlit secrets first (for deployment)
-    secret_key = st.secrets.get("GEMINI_API_KEY") if hasattr(st, "secrets") else None
+    try:
+        secret_key = st.secrets.get("GEMINI_API_KEY")
+    except StreamlitSecretNotFoundError:
+        secret_key = None
     if secret_key:
         return secret_key
 

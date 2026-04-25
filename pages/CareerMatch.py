@@ -1,6 +1,6 @@
 import streamlit as st # type: ignore
 import ui.render_footer as footer
-import ui. render_header as header
+import ui.render_header as header
 import ui.theme as theme
 from ui.icons import ICON_APP, ICON_CAREERMATCH
 import preprocessor.parser as parser
