@@ -29,29 +29,61 @@ class SentenceTransformerEmbedder:
     def __init__(self, model_name: str = EMBEDDING_MODEL_NAME):
         self.model_name = model_name
         self._model = None
+        self.embedding_dim = 384
 
     def fit(self, texts: Iterable[str], labels=None):  # noqa: D401, ANN001
         return self
 
     def _load_model(self):
         if self._model is None:
-            from sentence_transformers import SentenceTransformer  # type: ignore
+            try:
+                from sentence_transformers import SentenceTransformer  # type: ignore
 
-            self._model = SentenceTransformer(self.model_name)
+                self._model = SentenceTransformer(self.model_name)
+                if hasattr(self._model, "get_embedding_dimension"):
+                    self.embedding_dim = int(self._model.get_embedding_dimension())
+                else:
+                    self.embedding_dim = int(self._model.get_sentence_embedding_dimension())
+            except Exception:
+                self._model = None
         return self._model
 
     def transform(self, texts: Iterable[str]):
-        model = self._load_model()
         text_list = [str(text or "") for text in texts]
+
+        model = self._load_model()
+        if model is None:
+            return sp.csr_matrix((len(text_list), self.embedding_dim), dtype=np.float32)
+
         embeddings = model.encode(text_list, normalize_embeddings=True, show_progress_bar=False)
         return sp.csr_matrix(np.asarray(embeddings, dtype=np.float32))
 
     def __getstate__(self):
-        return {"model_name": self.model_name, "_model": None}
+        return {
+            "model_name": self.model_name,
+            "embedding_dim": self.embedding_dim,
+            "_model": None,
+        }
 
     def __setstate__(self, state):
         self.model_name = state["model_name"]
+        self.embedding_dim = int(state.get("embedding_dim", 384))
         self._model = None
+
+
+def _load_job_names() -> list[str]:
+    if METADATA_PATH.exists():
+        try:
+            with METADATA_PATH.open("r", encoding="utf-8") as file_handle:
+                metadata = json.load(file_handle)
+                job_names = metadata.get("job_names", [])
+                if isinstance(job_names, list):
+                    return [str(item) for item in job_names if str(item).strip()]
+        except Exception:
+            pass
+
+    job_to_skill = _load_json(JOB_TO_SKILL_PATH)
+    return _normalize_job_labels(job_to_skill.keys())
 
 
 def _load_json(path: Path):
@@ -231,7 +263,7 @@ def recommend_top_jobs(resume_skills: list[str], top_n: int = 5, resume_text: st
 
     job_definitions = _load_json(JOB_DEFINITION_PATH)
     job_to_skill = _load_json(JOB_TO_SKILL_PATH)
-    all_jobs = list(getattr(model.named_steps["classifier"], "classes_", []))
+    all_jobs = _load_job_names()
 
     if not all_jobs:
         return _rule_based_recommendations(resume_skills, top_n)
@@ -244,7 +276,26 @@ def recommend_top_jobs(resume_skills: list[str], top_n: int = 5, resume_text: st
         return _rule_based_recommendations(resume_skills, top_n)
 
     probabilities = model.predict_proba([combined_text])
-    job_scores = [float(score) for score in probabilities[0]]
+
+    if isinstance(probabilities, list):
+        job_scores = []
+        for prob in probabilities:
+            prob_array = np.asarray(prob)
+            if prob_array.ndim == 2 and prob_array.shape[1] > 1:
+                job_scores.append(float(prob_array[0, 1]))
+            elif prob_array.ndim == 2:
+                job_scores.append(float(prob_array[0, 0]))
+            else:
+                job_scores.append(float(prob_array.ravel()[0]))
+    else:
+        prob_array = np.asarray(probabilities)
+        if prob_array.ndim == 2:
+            job_scores = [float(score) for score in prob_array[0]]
+        else:
+            job_scores = [float(score) for score in prob_array.ravel()]
+
+    if len(job_scores) != len(all_jobs):
+        return _rule_based_recommendations(resume_skills, top_n)
 
     ranked_indices = sorted(range(len(all_jobs)), key=lambda index: job_scores[index], reverse=True)
     resume_skill_set = {skill.lower() for skill in resume_skills}
@@ -277,7 +328,7 @@ def recommend_top_jobs(resume_skills: list[str], top_n: int = 5, resume_text: st
                 "match_count": len(matched_skills),
                 "matched_skills": matched_skills,
                 "description": full_description,
-                "confidence": round(job_scores[index] * 100, 1),
+                "confidence": round(max(0.0, min(100.0, job_scores[index] * 100.0)), 1),
                 "source": "ml",
             }
         )

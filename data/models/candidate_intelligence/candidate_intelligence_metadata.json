@@ -1,0 +1,11 @@
+{
+  "resume_rows": 1000,
+  "job_rows": 1167,
+  "classification_features": 17,
+  "regression_features": 18,
+  "clusters": 4,
+  "silhouette_score": 0.4274215277580678,
+  "job_text_column": "job_description",
+  "resume_data_path": "datasets\\preprocessed_resumes.csv",
+  "jobs_data_path": "datasets\\preprocessed_jobs.csv"
+}

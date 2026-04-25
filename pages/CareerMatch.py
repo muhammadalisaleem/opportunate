@@ -1,4 +1,5 @@
 import streamlit as st # type: ignore
+import pandas as pd
 import ui.render_footer as footer
 import ui.render_header as header
 import ui.theme as theme
@@ -9,6 +10,7 @@ import preprocessor.personal_info as pf
 import recommender.top_n_jobs as jobRec
 from preprocessor.spacy_nlp import load_spacy_nlp_model
 from analyzer.resume_role_model import build_profile_text, predict_role
+from analyzer.candidate_intelligence import predict_candidate_insights
 
 # Page configuration
 st.set_page_config(
@@ -135,6 +137,47 @@ if uploaded_file is not None:
             st.markdown("<br>", unsafe_allow_html=True)
     else:
         st.write("No jobs found matching your skills.")
+
+    st.divider()
+    st.subheader("📈 Advanced ML Insights")
+    st.caption("Notebook-trained models for decision fit, salary estimate, cluster persona, and content-based recommendations.")
+
+    insights = predict_candidate_insights(extracted_text, skills, top_n=5)
+    if not insights.get("available"):
+        st.info(insights.get("reason", "Advanced ML models are not available yet."))
+    else:
+        cards = st.columns(3)
+        with cards[0]:
+            decision = insights.get("decision", "Unknown")
+            confidence = insights.get("decision_confidence", 0)
+            st.metric("Recruiter Decision", decision)
+            st.caption(f"Confidence: {confidence}%")
+
+        with cards[1]:
+            salary = insights.get("salary_prediction", 0)
+            st.metric("Salary Estimate", f"${salary:,.0f}")
+            st.caption("Predicted expected salary")
+
+        with cards[2]:
+            cluster = insights.get("cluster", "N/A")
+            st.metric("Candidate Cluster", f"Cluster {cluster}")
+            st.caption("Profile similarity segment")
+
+        st.markdown("#### 🎯 Content-Based Job Matches")
+        recommendation_rows = insights.get("recommendations", [])
+        if recommendation_rows:
+            rec_df = pd.DataFrame(recommendation_rows)
+            renamed = rec_df.rename(
+                columns={
+                    "job_id": "Job ID",
+                    "job_title": "Job Title",
+                    "category": "Category",
+                    "match_score": "Match Score",
+                }
+            )
+            st.dataframe(renamed, use_container_width=True, hide_index=True)
+        else:
+            st.info("No content-based matches available for this profile.")
 
 # Footer
 footer.render_footer("careermatch")
