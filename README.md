@@ -15,7 +15,6 @@ Opportunate helps job seekers move faster by keeping all critical workflows in o
 ### JobRadar
 Purpose: Fast job search redirection with role and location inputs.
 
-Highlights:
 - Default location set to Pakistan
 - Direct listing links for LinkedIn and Indeed
 - Clean input flow for role, location, and experience filters
@@ -23,17 +22,15 @@ Highlights:
 ### JobMatcher
 Purpose: Compare a resume against a job description.
 
-Highlights:
 - Resume upload (PDF/DOCX)
 - JD upload or paste mode
 - Hard-skill and soft-skill scoring
-- Semantic match integration (when available)
+- Semantic match integration
 - Missing skills and suggested learning resources
 
 ### CareerMatch
 Purpose: Recommend likely job roles and related opportunities from resume content.
 
-Highlights:
 - Extracts personal/education/skills signals
 - ML role prediction with confidence
 - Top-N recommendation slider
@@ -42,7 +39,6 @@ Highlights:
 ### SkillBridge
 Purpose: Identify and prioritize skill gaps for a target role.
 
-Highlights:
 - Resume parsing and skill extraction
 - Role-skill comparison using dataset mappings
 - AI-ranked skill-gap prioritization
@@ -51,7 +47,6 @@ Highlights:
 ### ResumeBuilder
 Purpose: Generate a structured ATS-friendly resume.
 
-Highlights:
 - Dynamic form sections (education, experience, projects, certifications)
 - Validation and ATS-oriented warnings
 - Optional Gemini-powered content enhancement
@@ -60,7 +55,6 @@ Highlights:
 ### ATS TuneUp
 Purpose: Evaluate ATS compatibility using multiple strategies.
 
-Highlights:
 - Local rule-based ATS checks
 - ML ATS score prediction
 - Optional Gemini-enhanced ATS analysis
